@@ -1,4 +1,17 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content%}
+
 <div class="col-md-4">
-    {{ wtf.quick_form(pitch_form) }}
+    {{ wtf.quick_form(form) }}
     {{simplemde.load}}
+
+    {% for pitch in pitches %}
+        <p>{{pitch.id}}</p>
+        <h3>{{pitch.description}}</h3>
+        <h4>{{user.username}}</h4>
+        {%endfor%}
+    </div>
 </div>
+
+{%endblock%}

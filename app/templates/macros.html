@@ -1,0 +1,42 @@
+{% macro display(category_list)%}
+    {% for category in category_list %}
+    <div class="row">
+        <div class="col_xs_2 col_sm_2 col_md_4 col_lg_4">
+            <h3>{{category.title}}</h3>
+            <div >
+               <h3>{{category.description}}</h3>
+            </div>
+            <h3>{{category.user.username}}</h3>
+        </div>
+    </div>
+
+    {% endfor %}
+
+{% endmacro %}
+
+({% macro displayPitches(all_pitches)%}
+{% for pitch in pitches %}
+<div class="col-md-4" >
+    <div class="row">
+        <p>{{pitch.id}}</p>
+        <h3>{{pitch.description}}</h3>
+        <h4>{{user.username}}</h4>   
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% endmacro %}
+
+{% macro displayComment(comment)%}  
+{% for comment in comment %}  
+<div class="row">
+    <p>{{comment.description}}</p>
+    {{comment.user.username}}
+</div>
+
+
+{% endfor %}
+
+{% endmacro %}
