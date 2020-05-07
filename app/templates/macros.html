@@ -15,12 +15,13 @@
 {% endmacro %}
 
 ({% macro displayPitches(all_pitches)%}
-{% for pitch in pitches %}
-<div class="col-md-4" >
-    <div class="row">
+{% for pitch in all_pitches %}
+<div class="row" >
+    <div class="col-md-4 card">
+        <h1>{{pitch.title}}</h1>
         <p>{{pitch.id}}</p>
         <h3>{{pitch.description}}</h3>
-        <h4>{{user.username}}</h4>   
+      
     </div>
 
 </div>

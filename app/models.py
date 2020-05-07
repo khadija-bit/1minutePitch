@@ -26,8 +26,8 @@ class User(UserMixin,db.Model):
     password_hash = db.Column(db.String(255))
 
     #relation
-    pitch = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
-    comment = db.relationship('Comment',backref = 'user',lazy = "dynamic") 
+    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
+    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic") 
     upvote = db.relationship('UpVote',backref = 'user',lazy = "dynamic") 
     downvote = db.relationship('DownVote',backref = 'user',lazy = "dynamic") 
     
@@ -69,7 +69,7 @@ class Pitch(db.Model):
     category = db.Column(db.String)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     time = db.Column(db.DateTime,default=datetime.utcnow)
-    comment = db.relationship('Comment',backref='pitch',lazy='dynamic')
+    comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvote = db.relationship('UpVote',backref='pitch',lazy='dynamic')
     downvote = db.relationship('DownVote',backref='pitch',lazy='dynamic')
 
@@ -79,28 +79,28 @@ class Pitch(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_pitch(cls,id):
-        pitches = pitches.query.filter_by(user_id).all()
+    def get_pitch(cls,category):
+        pitches = Pitch.query.filter_by(category=category).all()
         return pitches  
           
-    def __repr__(self):
-        return f"Pitch ('{self.id}','{self.time}')"   
+    # def __repr__(self):
+    #     return f"Pitch ('{self.id}','{self.time}')"   
 
 
 class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    Comment = db.Column(db.Text(),nullable = False)
+    comment = db.Column(db.String(255), index=True)   
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"),nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable = False)
-
+   
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_comment(cls,pitch_id):
+    def get_comments(cls,pitch_id):
         comments = Comment.query.filter_by(pitch_id = pitch_id).all()
         return comments
     

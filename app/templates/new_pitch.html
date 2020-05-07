@@ -3,14 +3,8 @@
 {% block content%}
 
 <div class="col-md-4">
-    {{ wtf.quick_form(form) }}
+    {{ wtf.quick_form(pitchform) }}
     {{simplemde.load}}
-
-    {% for pitch in pitches %}
-        <p>{{pitch.id}}</p>
-        <h3>{{pitch.description}}</h3>
-        <h4>{{user.username}}</h4>
-        {%endfor%}
     </div>
 </div>
 

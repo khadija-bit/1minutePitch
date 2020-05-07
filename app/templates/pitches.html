@@ -2,24 +2,36 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block content%}
 
-{% block navbar %}
-    {% include 'navbar.html' %}
-{% endblock %}
-<div class="container-fluid">
-
-  <div class="row">
-    <div class="col-sm-4">
-        <img src="{{pitches.image_path}}" class="img-resposive">
-    </div> 
-    
-    <div class="col-sm-8">
-        <!-- {{format_pitch|safe}} -->
-        {% for pitch in pitches %}
-        <p>{{pitch.id}}</p>
-        <h3>{{pitch.description}}</h3>
-        <h4>{{user.username}}</h4>
+<div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Pitch</div>
+            <div class="panel-body">
+                <p>{{ pitch.title }}</p>
+                <p><strong>by: {{ pitch.user.username }}</strong></p>
+                <a href="{{url_for('main.comment',pitch_id=pitch.id)}}" class="btn btn-primary">Comment</a>
+            </div>
+        </div>
+        <div>
+            <h1>Comments</h1>
+            {% for comment in comments %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                <p>Comment By:{{ comment.user.username }}</p>
+                <p>{{ comment.comment }}</p>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-   </div> 
-</div> 
-
-{%endblock%}
+    <div class="col-md-4">
+        
+        <form action="/pitchdiscussion/{{pitch.id}}/comment" method="post">
+           <div class="form-group">
+               <input type="text" name="comment" class="form-control">
+               <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            </div> 
+        </form>
+    </div>
+</div>
+{% endblock %}
