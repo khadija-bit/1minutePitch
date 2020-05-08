@@ -14,13 +14,14 @@
 
 {% endmacro %}
 
-({% macro displayPitches(all_pitches)%}
+<!-- ({% macro displayPitches(all_pitches)%}
 {% for pitch in all_pitches %}
 <div class="row" >
     <div class="col-md-4 card">
         <h1>{{pitch.title}}</h1>
-        <p>{{pitch.id}}</p>
+        <p>{{pitch.category}}</p>
         <h3>{{pitch.description}}</h3>
+        <p><strong>by:{{pitch.user.username}}</strong></p> 
       
     </div>
 
@@ -28,7 +29,7 @@
 
 {% endfor %}
 
-{% endmacro %}
+{% endmacro %} -->
 
 {% macro displayComment(comment)%}  
 {% for comment in comment %}  

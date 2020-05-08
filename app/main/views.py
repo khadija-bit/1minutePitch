@@ -65,10 +65,10 @@ def update_pic(uname):
 def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
-        # title = form.title.data
+        title = form.title.data
         category = form.category.data
         description = form.description.data
-        new_pitch = Pitch(category= category, description= description, user= current_user)
+        new_pitch = Pitch(category= category,title =title, description= description, user= current_user)
         new_pitch.save_pitch()
         db.session.add(new_pitch)
         db.session.commit()

@@ -4,13 +4,14 @@
 {% block content%}
     <div class="container">
         <div class="row">
-              {% if comments %}
+         {% if all_comments %}   
+              {% for comment in all_comments %}
+                 
             <div class="col-md-4">
                 <h3 class="text-center">comment for the post</h3>
-                {% for comment in comments %}
                 <div class="card">
                     <h4>{{comment.pitch.title}}</h4>
-                    <p>comment.user.username</p>
+                    <p>{{comment.user.username}}</p>
 
                 </div>
 
@@ -20,5 +21,5 @@
     </div>
     {{ wtf.quick_form(form) }}
     {%endif%}
-    
+
     {% endblock %}
