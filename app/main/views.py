@@ -96,7 +96,7 @@ def comment(pitch_id):
         comment = request.comment.data
         pitch_id = pitch_id
         user_id = current_user._get_current_object().id
-        new_comment = Comment(comment= comment,pitch  = current_pitch,User= user)
+        new_comment = Comment(comment= comment,pitch  = current_pitch,User= current_user)
         new_comment.save_comment()
 
 
