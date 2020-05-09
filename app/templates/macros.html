@@ -2,7 +2,7 @@
     {% for category in category_list %}
     <div class="row">
         <div class="col_xs_2 col_sm_2 col_md_4 col_lg_4">
-            <h3>{{category.title}}</h3>
+            <h3 class="card-header">{{category.title}}</h3>
             <div >
                <h3>{{category.description}}</h3>
             </div>
@@ -35,7 +35,7 @@
 {% for comment in comment %}  
 <div class="row">
     <p>{{comment.description}}</p>
-    {{comment.user.username}}
+    <p>posted by {{comment.user.username}}</p>
 </div>
 
 

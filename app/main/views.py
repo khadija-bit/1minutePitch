@@ -85,24 +85,24 @@ def new_pitch():
 #     return render_template('pitches.html', pitch=pitch)  
 
 
-# @main.route('/comment/new/<int:pitch_id>',methods = ['GET', 'POST'])
-# @login_required
-# def comment(pitch_id):
-#     form = CommentForm()
-#     current_pitch = Pitch.query.filter_by(id = pitch_id).first()
-#     user = User.query.filter_by().first()
-#     Comments = Comment.query.filter_by(pitch_id= pitch_id).all()
-#     if form.validate_on_submit():
-#         comment = request.comment.data
-#         pitch_id = pitch_id
-#         user_id = current_user._get_current_object().id
-#         new_comment = Comment(comment= comment,pitch  = current_pitch,User= current_user)
-#         new_comment.save_comment()
+@main.route('/comment/new/<int:pitch_id>',methods = ['GET', 'POST'])
+@login_required
+def comment(pitch_id):
+    form = CommentForm()
+    current_pitch = Pitch.query.filter_by(id = pitch_id).first()
+    user = User.query.filter_by().first()
+    Comments = Comment.query.filter_by(pitch_id= pitch_id).all()
+    if form.validate_on_submit():
+        comment = request.comment.data
+        pitch_id = pitch_id
+        user_id = current_user._get_current_object().id
+        new_comment = Comment(comment= comment,pitch  = current_pitch,User= user)
+        new_comment.save_comment()
 
 
-#         return redirect(url_for('.comment', pitch_id = pitch_id))
+        return redirect(url_for('.comment', pitch_id = pitch_id))
 
-#     return render_template('comment.html',form = form, pitch = pitch)  
+    return render_template('comment.html',form = form, pitch = pitch)  
 
 
 @main.route('/pitches/upvote/<int:pitch_id>',methods = ['GET', 'POST'])
