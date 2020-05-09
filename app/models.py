@@ -112,7 +112,7 @@ class UpVote(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
+    upvote = db.Column(db.Integer, default= 1)
 
 
     def save(self):
@@ -134,7 +134,7 @@ class DownVote(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
+    downvote = db.Column(db.Integer, default= 1)
 
     def save(self):
         db.session.add(self)

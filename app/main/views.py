@@ -90,7 +90,7 @@ def new_pitch():
 def comment(pitch_id):
     form = CommentForm()
     pitch = Pitch.query.get(pitch_id)
-    comments = Comment.query.filter_by(pitch_id= pitch_id).all()
+    # comments = Comment.query.filter_by(pitch_id= pitch_id).all()
     if form.validate_on_submit():
         comment = form.comment.data
         pitch_id = pitch_id
@@ -101,15 +101,15 @@ def comment(pitch_id):
 
         return redirect(url_for('.comment', pitch_id = pitch_id))
 
-    return render_template('comment.html',form = form,pitch=pitch,comments=comments)  
+    return render_template('comment.html',form = form,pitch=pitch)  
 
 
 @main.route('/pitches/upvote/<int:pitch_id>',methods = ['GET', 'POST'])
 @login_required
 def upvote(pitch_id):
-    pitches = Pitch.query.all(pitch_id)
+    pitches = Pitch.query.all()
     user = current_user
-    upvotes = UpVote.query.filter_by(pitch_id=pitch_id)
+    upvotes = UpVote.query.filter_by(pitch_id= pitch_id,upvote= 1)
     
     return redirect(url_for('main.index'))
 
@@ -119,6 +119,6 @@ def upvote(pitch_id):
 def downvote(pitch_id):
     pitches = Pitch.query.get(pitch_id)
     user = current_user
-    downvotes =   DownVote.query.filter_by(pitch_id=pitch_id)
+    downvotes = DownVote.query.filter_by(pitch_id= pitch_id, downvote= 1)
     
     return redirect(url_for('main.index'))
