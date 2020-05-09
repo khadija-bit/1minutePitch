@@ -27,7 +27,7 @@ class User(UserMixin,db.Model):
 
     #relation
     pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
-    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic") 
+    comment = db.relationship('Comment',backref = 'user',lazy = "dynamic") 
     upvote = db.relationship('UpVote',backref = 'user',lazy = "dynamic") 
     downvote = db.relationship('DownVote',backref = 'user',lazy = "dynamic") 
     
@@ -91,7 +91,7 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    comment = db.Column(db.String)   
+    description = db.Column(db.String)   
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"),nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable = False)
    

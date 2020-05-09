@@ -90,18 +90,19 @@ def new_pitch():
 def comment(pitch_id):
     form = CommentForm()
     pitch = Pitch.query.get(pitch_id)
-    # comments = Comment.query.filter_by(pitch_id= pitch_id).all()
+    # all_comments = Comment.query.filter_by(pitch_id= pitch_id).all()
     if form.validate_on_submit():
-        comment = form.comment.data
+        description = form.description.data
         pitch_id = pitch_id
         user_id = current_user._get_current_object().id
-        new_comment = Comment(comment= comment, pitch_id= pitch_id,user_id= user_id)
-        new_comment.save_comment()
+        new_comment = Comment(description= description, pitch_id= pitch_id,user_id= current_user)
+        # new_comment.save_comment()
+        # db.session.add(new_comment)
+        # db.session.commit()
 
+        return redirect(url_for('main.comment', pitch_id = pitch_id))
 
-        return redirect(url_for('.comment', pitch_id = pitch_id))
-
-    return render_template('comment.html',form = form,pitch=pitch)  
+    return render_template('comment.html',form = form,pitch= pitch)  
 
 
 @main.route('/pitches/upvote/<int:pitch_id>',methods = ['GET', 'POST'])
